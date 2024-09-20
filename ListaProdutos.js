@@ -9,8 +9,7 @@ const products = [
     { codigo: '008', nome: 'Produto B', avaliacao: '4.0', descricao: 'Descrição do Produto B', preco: 'R$ 200,00', qtd: 20 },
     { codigo: '009', nome: 'Produto B', avaliacao: '4.0', descricao: 'Descrição do Produto B', preco: 'R$ 200,00', qtd: 20 },
     { codigo: '010', nome: 'Produto B', avaliacao: '4.0', descricao: 'Descrição do Produto B', preco: 'R$ 200,00', qtd: 20 },
-    { codigo: '011', nome: 'Produto B', avaliacao: '4.0', descricao: 'Descrição do Produto B', preco: 'R$ 200,00', qtd: 20 }
-    
+ 
 ];
 
 const itemsPorPagina = 10;
