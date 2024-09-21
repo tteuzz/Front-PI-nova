@@ -10,7 +10,7 @@ function fetchProducts() {
     fetch('http://localhost:8015/produto/list') 
         .then(response => response.json())
         .then(data => {
-            console.log(data); // Verifique a estrutura dos dados aqui
+            console.log(data); 
             products = data; 
             displayProducts();
         })
