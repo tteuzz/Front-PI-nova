@@ -30,25 +30,22 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 },
                 body: JSON.stringify(dadosProduto)
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Erro ao cadastrar produto: ${response.status}: ${response.statusText}`);
-                }
-                return response.json(); // Retorna o produto cadastrado
-            })
+            .then(response => response.json())
             .then(produto => {
                 const formData = new FormData();
                 const caminhoBase = 'Documentos/imgs/';
 
-                Array.from(uploadInput.files).forEach((file, index) => {
+                Array.from(uploadInput.files).forEach((file) => {
+                    // Cria um objeto para cada imagem
                     const imgDTO = {
                         FkIdproduto: produto.id,
-                        caminhoImg: `${caminhoBase}${file.name}`,
-                        imgPrincipal: index === 0 
+                        caminhoImg: caminhoBase + file.name,
+                        imgPrincipal: false
                     };
 
-                    formData.append('file', file); 
-                    formData.append('imgProdutoRequestDTO', JSON.stringify(imgDTO)); 
+                    // Adiciona a imagem ao FormData
+                    formData.append('files', file);
+                    formData.append('imgProdutoRequestDTO', JSON.stringify(imgDTO));
                 });
 
                 // Envio das imagens
@@ -57,19 +54,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     body: formData
                 });
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Erro ao enviar imagens: ${response.statusText}`);
-                }
-                return response.json(); // Retorna as URLs das imagens
-            })
+            .then(response => response.json())
             .then(imageData => {
-                console.log('URLs das imagens:', imageData); 
+                console.log('URLs das imagens:', imageData);
                 alert('Imagens enviadas com sucesso!');
-                window.location.href = 'telaPrincipal.html';
+                window.location.href = 'ListaProdutos.html';
             })
             .catch(error => {
-                // Captura erros em qualquer parte do processo
                 console.error('Erro:', error);
                 alert('Erro ao cadastrar o produto ou enviar imagens: ' + error.message);
             });
@@ -80,7 +71,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 function previewImages(event) {
     const files = event.target.files;
     const previewsContainer = document.getElementById('image-previews');
-    previewsContainer.innerHTML = '';
+    previewsContainer.innerHTML = ''; // Limpa o contêiner antes de adicionar novas imagens
 
     Array.from(files).forEach(file => {
         const reader = new FileReader();
