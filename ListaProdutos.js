@@ -10,7 +10,6 @@ function fetchProducts() {
     fetch('http://localhost:8015/produto/list') 
         .then(response => response.json())
         .then(data => {
-            console.log(data); 
             products = data; 
             displayProducts();
         })
@@ -29,24 +28,21 @@ function displayProducts() {
     const paginatedProducts = products.slice(start, end);
 
     paginatedProducts.forEach(product => {
-        const imgSrc = product.imagens && product.imagens.length > 0 ? product.imagens[0].caminhoImg : 'default_image_url.jpg';
+        const isActive = product.prodDhInativo === null;
+        const status = isActive ? 'Ativo' : 'Inativo';
+        
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${product.idProduto || 'N/A'}</td>
-            <td>
-                <img src="${imgSrc}" 
-                     alt="${product.nomeProduto || 'Imagem indisponível'}" 
-                     class="image-preview" 
-                     style="width: 50px; height: auto;" />
-            </td>
             <td>${product.nomeProduto || 'N/A'}</td>
             <td>${product.avalProduto !== null ? product.avalProduto : 'N/A'}</td>
             <td>${product.descDetalhadaProduto || 'N/A'}</td>
             <td>R$ ${product.precoProduto ? product.precoProduto.toFixed(2) : 'N/A'}</td>
             <td>${product.qtdEstoqueProduto || 0}</td>
+            <td>${status}</td>
             <td>
                 <button onclick="viewProduct('${product.idProduto}')">Visualizar</button>
-                <button onclick="deleteProduct('${product.idProduto}')">Excluir</button>
+                <button onclick="openModal('${product.idProduto}', ${product.qtdEstoqueProduto})">Editar</button>
             </td>
         `;
         tableBody.appendChild(row);
@@ -67,4 +63,74 @@ function prevPage() {
         paginaAtual--;
         displayProducts();
     }
+}
+
+function openModal(id, quantidade) {
+    document.getElementById('idProduto').value = id;
+    document.getElementById('qtdEstoqueProduto').value = quantidade;
+    document.getElementById('editModal').style.display = 'flex';
+}
+
+function closeModal() {
+    document.getElementById('editModal').style.display = 'none';
+}
+
+function saveQuantity() {
+    const idProduto = document.getElementById('idProduto').value;
+    const novaQuantidade = parseInt(document.getElementById('qtdEstoqueProduto').value);
+
+    if (novaQuantidade < 0) {
+        alert('Por favor, insira uma quantidade válida (maior ou igual a zero).');
+        return;
+    }
+
+    if (novaQuantidade === 0) {
+        alterarStatus(idProduto)
+            .then(() => atualizarQuantidade(idProduto, novaQuantidade))
+            .catch(error => console.error('Erro ao alterar status:', error));
+    } else {
+        atualizarQuantidade(idProduto, novaQuantidade);
+    }
+}
+
+function atualizarQuantidade(idProduto, novaQuantidade) {
+    fetch(`http://localhost:8015/produto/${idProduto}/${novaQuantidade}/alteraQuantidade`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Quantidade atualizada com sucesso!');
+            closeModal();
+            const produto = products.find(p => p.idProduto === idProduto);
+            if (produto) {
+                produto.qtdEstoqueProduto = novaQuantidade;
+                produto.prodDhInativo = novaQuantidade === 0 ? new Date() : null;
+            }
+            displayProducts();
+        } else {
+            alert('Erro ao atualizar quantidade.');
+        }
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+        alert('Erro ao atualizar quantidade.');
+    });
+}
+
+function alterarStatus(idProduto) {
+    return fetch(`http://localhost:8015/produto/${idProduto}/alterarStatus`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            alert('Erro ao alterar status.');
+            throw new Error('Erro ao alterar status');
+        }
+    });
 }
