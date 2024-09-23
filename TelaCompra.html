@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Compras</title>
+    <link rel="stylesheet" href="TelaCompra.css">
+</head>
+
+<body>
+    <header>
+        <div class="container-header">
+            <img src="img/LOGO NOVA.jpg" alt="Logo">
+            <h2 class="nome-loja">N O V A</h2>
+            <img class="icone" src="img/perfil.png" alt="icone de uma pessoa">
+        </div>
+    </header>
+
+    <div class="espaco-body">
+        <p>""</p>
+    </div>
+
+    <div class="header-body">
+        <h1 class="titulo">Tela de Compras</h1>
+    </div>
+
+    <div class="tabela-container">
+        <table class="tabela">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nome</th>
+                    <th>Avaliação</th>
+                    <th>Descrição Detalhada</th>
+                    <th>Preço</th>
+                    <th>Qtd em Estoque</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="product-table-body"></tbody>
+        </table>
+    </div>
+
+    <div class="pagination-container">
+        <button id="prev-page" onclick="prevPage()">Anterior</button>
+        <span id="page-info"></span>
+        <button id="next-page" onclick="nextPage()">Próxima</button>
+    </div>
+
+    <script src="TelaCompra.js"></script>
+</body>
+</html>

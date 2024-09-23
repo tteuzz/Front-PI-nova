@@ -81,74 +81,94 @@ img {
 }
 
 .botao-add a button {
-    background-color: #000; /* Fundo preto */
-    color: #fff; /* Cor do texto */
-    border: none; /* Remove a borda */
-    border-radius: 5px; /* Bordas levemente arredondadas */
-    padding: 10px 20px; /* Espaçamento interno */
-    font-family: 'Inter', sans-serif; /* Fonte consistente */
-    font-size: 16px; /* Tamanho da fonte */
-    cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
-    transition: background-color 0.3s; /* Transição suave para o efeito de hover */
+    background-color: #000; 
+    color: #fff;
+    border: none; 
+    border-radius: 5px; 
+    padding: 10px 20px; 
+    font-family: 'Inter', sans-serif; 
+    font-size: 16px; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
 }
 
 .botao-add a button:hover {
-    background-color: #191340; /* Cor de fundo ao passar o mouse */
+    background-color: #191340; 
 }
 
 
 
 .caixa-pesquisa {
     display: flex;
-    align-items: center; /* Alinha verticalmente ao centro */
-    gap: 10px; /* Espaçamento entre os elementos */
-    margin-top: 20px; /* Espaçamento superior */
-    margin-left: 30px; /* Adiciona margem à esquerda */
+    align-items: center; 
+    gap: 10px; 
+    margin-top: 20px; 
+    margin-left: 30px; 
 }
 
 .pesquisa {
-    background-color: #fff; /* Cor de fundo branca */
-    color: #191340; /* Cor do texto */
-    border: 1px solid #ccc; /* Borda fina e suave */
-    border-radius: 5px; /* Bordas levemente arredondadas */
-    padding: 10px 20px; /* Espaçamento interno */
-    font-family: "Inter", sans-serif; /* Fonte consistente */
-    font-size: 16px; /* Tamanho da fonte */
-    transition: border-color 0.3s, box-shadow 0.3s; /* Transição suave para o efeito de foco */
-    outline: none; /* Remove o contorno padrão */
-    box-shadow: none; /* Remove a sombra padrão */
-    -webkit-appearance: none; /* Remove a aparência padrão no Safari */
-    -moz-appearance: none; /* Remove a aparência padrão no Firefox */
-    appearance: none; /* Remove a aparência padrão nos navegadores modernos */
+    background-color: #fff;
+    color: #191340;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    outline: none;
+    box-shadow: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 .pesquisa::placeholder {
-    color: #aaa; /* Cor do texto do placeholder */
-    opacity: 1; /* Opacidade do texto do placeholder */
+    color: #aaa;
+    opacity: 1;
 }
 
 .pesquisa:focus {
-    border-color: #191340; /* Cor da borda ao focar */
-    box-shadow: 0 0 5px rgba(25, 19, 64, 0.5); /* Sombra ao focar */
+    border-color: #191340;
+    box-shadow: 0 0 5px rgba(25, 19, 64, 0.5);
 }
 
 .botao-pesquisa {
-    background-color: #fff; /* Cor de fundo branca */
-    color: #191340; /* Cor do texto */
-    border: 1px solid #191340; /* Borda fina */
-    border-radius: 5px; /* Bordas levemente arredondadas */
-    padding: 10px 20px; /* Espaçamento interno */
-    font-family: "Inter", sans-serif; /* Fonte consistente */
-    font-size: 16px; /* Tamanho da fonte */
-    cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
-    transition: background-color 0.3s, color 0.3s; /* Transição suave para o efeito de hover */
-    outline: none; /* Remove o contorno padrão */
-    margin-left: 10px; /* Adiciona margem à esquerda para separar do campo de pesquisa */
+    background-color: #fff;
+    color: #191340;
+    border: 1px solid #191340;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    outline: none;
+    margin-left: 10px;
 }
 
 .botao-pesquisa:hover {
-    background-color: #191340; /* Cor de fundo ao passar o mouse */
-    color: #fff; /* Cor do texto ao passar o mouse */
+    background-color: #191340;
+    color: #fff;
+}
+
+.botao-addCarrinho{
+    background-color: #fff;
+    color: #191340;
+    border: 1px solid #191340;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 40px;
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    outline: none;
+    margin-left: 10px;
+}
+
+.botao-addCarrinho:hover {
+    background-color: #191340;
+    color: #fff;
 }
 
 .tabela-container {
@@ -218,4 +238,90 @@ img {
 
 .pagination-container span {
     font-size: 16px;
+}
+
+.checkbox-ativa {
+    margin-left: 10px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    font-family: "Inter", sans-serif;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 800px;
+    height: 80%;
+    max-height: 600px;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 20px auto;
+    overflow: hidden;
+    height: 50%;
+}
+
+.carousel-images {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    height: 100%;
+}
+
+.carousel-images img {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 10px;
+    height: auto;
+    object-fit: contain;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.carousel-button.prev {
+    left: 10px;
+}
+
+.carousel-button.next {
+    right: 10px;
+}
+
+.carousel-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
 }
