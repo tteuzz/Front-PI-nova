@@ -77,14 +77,27 @@ function viewProduct(idProduto) {
         })
         .then(data => {
             images = [];
+            const principalImage = data.find(img => img.imgPrincipal); 
+            if (principalImage) {
+                const principalImgElement = document.createElement('img');
+                principalImgElement.src = `data:image/jpeg;base64,${principalImage.imgBlob}`;
+                principalImgElement.alt = principalImage.nomeArquivos; 
+                principalImgElement.classList.add('carousel-image'); 
+                carouselImages.appendChild(principalImgElement);
+                images.push(principalImgElement.src);
+            }
+
             data.forEach(img => {
-                const imgElement = document.createElement('img');
-                imgElement.src = `data:image/jpeg;base64,${img.imgBlob}`;
-                imgElement.alt = img.nomeArquivos; 
-                imgElement.classList.add('carousel-image'); 
-                images.push(imgElement.src);
-                carouselImages.appendChild(imgElement);
+                if (!img.imgPrincipal) {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = `data:image/jpeg;base64,${img.imgBlob}`;
+                    imgElement.alt = img.nomeArquivos; 
+                    imgElement.classList.add('carousel-image'); 
+                    carouselImages.appendChild(imgElement);
+                    images.push(imgElement.src);
+                }
             });
+
             if (images.length > 0) {
                 currentImageIndex = 0; 
                 carouselImages.firstChild.style.display = 'block';
@@ -100,6 +113,7 @@ function viewProduct(idProduto) {
         console.error('Produto não encontrado.');
     }
 }
+
 
 function nextImage() {
     const carouselImages = document.getElementById('carousel-images');
@@ -121,10 +135,11 @@ function prevImage() {
     }
 }
 
-
-function closeModal() {
-    document.getElementById('product-modal').style.display = 'none';
+function close(){
+     document.getElementById("product-modal").style.display = 'none';
 }
+
+
 
 function nextPage() {
     if (paginaAtual * itemsPorPagina < products.length) {
@@ -185,12 +200,16 @@ function atualizarQuantidade(idProduto, novaQuantidade) {
                 produto.prodDhInativo = novaQuantidade === 0 ? new Date() : null;
             }
             displayProducts();
+            window.location.reload();
+
         } else {
             alert('Erro ao atualizar quantidade.');
         }
     })
     .catch(error => {
         console.error('Erro:', error);
+
+
         alert('Erro ao atualizar quantidade.');
     });
 }

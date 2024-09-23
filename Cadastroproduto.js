@@ -6,7 +6,7 @@ function previewImages(event) {
     previewsContainer.innerHTML = ''; 
     imgsDto = [];
 
-    Array.from(files).forEach(file => {
+    Array.from(files).forEach((file, index) => {
         const img = document.createElement('img');
         img.src = URL.createObjectURL(file); 
         img.className = 'image-preview';
@@ -14,7 +14,7 @@ function previewImages(event) {
 
         const blobObject = { 
             blobImg: file,
-            imgPrincipal: false
+            imgPrincipal: index === 0 // Define imgPrincipal como true apenas para o primeiro arquivo
         };
         imgsDto.push(blobObject);
     });
@@ -69,7 +69,7 @@ function addBanco(id) {
     })
     .then(response => response.json())
     .then(() => {
-        window.location.href='ListaProdutos.html'
+        window.location.href='ListaProdutos.html';
     })
     .catch(error => {
         console.error('Erro:', error);
