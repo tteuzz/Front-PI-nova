@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Usuários</title>
-    <link rel="shortcut icon" href="../img/LOGO NOVA.jpg type="image/x-icon">
+    <link rel="shortcut icon" href="../img/LOGO NOVA.jpg type="image>
     <link rel="stylesheet" href="../Estilos/ListaUsuario.css">
+    <SCript src="../listaUsuario.js"></SCript>
 </head>
 
 <body>
@@ -29,9 +30,9 @@
         </div>
 
         <div class="caixa-pesquisa">
-            <input type="text" class="pesquisa" placeholder="Pesquisar usuário">
-            <button class="botao-pesquisa">Pesquisar</button>
-        </div>
+            <input type="text" class="pesquisa" id="searchInput" placeholder="Pesquisar usuário" onkeyup="searchUser()">
+            <button class="botao-pesquisa" onclick="searchUser()">Pesquisar</button>
+        </div>        
     </div>
 
 
@@ -52,6 +53,6 @@
     </div>
     </div>
 
-    <SCript src="../listaUsuario.js"></SCript>
+   <script src="../PesquisaInteligenteUsers.js"></script>
 </body>
 </html>
