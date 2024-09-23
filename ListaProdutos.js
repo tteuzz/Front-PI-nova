@@ -54,8 +54,23 @@ function displayProducts() {
 function viewProduct(id){
     fetch(`http://localhost:8015/imgProduto/${id}`)
     .then(response => response.json())
+    .then(data => {
+        //isso para pegar o carrosel
+        const imagesContainer = document.getElementById('imagesContainer'); 
+        imagesContainer.innerHTML = ''; 
+
+        data.forEach(img => {
+            const imgElement = document.createElement('img');
+            imgElement.src = `http://localhost:8015/umaImg/${img.idImgProd}`;
+            imgElement.alt = img.nomeArquivos; 
+            
+            //isso aqui seria para adicionar no carrosel
+            imagesContainer.appendChild(imgElement);
+
+        });
+    })
     .catch(error => {
-        console.error('Erro ao Imgs usuário:', error);
+        console.error('Erro ao buscar as imagens:', error);
         alert('Erro ao buscar as imgs.');
     });
 }
