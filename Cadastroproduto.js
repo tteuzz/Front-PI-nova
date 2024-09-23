@@ -1,3 +1,25 @@
+var imgsDto = [];
+
+function previewImages(event) {
+    const files = event.target.files;
+    const previewsContainer = document.getElementById('image-previews');
+    previewsContainer.innerHTML = ''; 
+    imgsDto = [];
+
+    Array.from(files).forEach(file => {
+        const img = document.createElement('img');
+        img.src = URL.createObjectURL(file); 
+        img.className = 'image-preview';
+        previewsContainer.appendChild(img);
+
+        const blobObject = { 
+            blobImg: file,
+            imgPrincipal: false
+        };
+        imgsDto.push(blobObject);
+    });
+}
+
 document.querySelector('.form-cadastro').onsubmit = function (event) {
     event.preventDefault();
 
@@ -7,26 +29,12 @@ document.querySelector('.form-cadastro').onsubmit = function (event) {
     const precoProduto = parseFloat(document.getElementById('precoProduto').value.replace(',', '.'));
     const qtdEstoqueProduto = parseInt(document.getElementById('qtdEstoqueProduto').value);
 
-    const imagens = Array.from(document.getElementById('upload').files).map(file => {
-        const caminhoImg = `C:\\Users\\kmendes\\Documents\\img\\${file.name}`;
-        return {
-            caminhoImg,
-            imgPrincipal: false
-        };
-    });
-
-    if (imagens.length === 0) {
-        alert('Por favor, adicione pelo menos uma imagem.');
-        return;
-    }
-
     const produtoData = {
         nomeProduto,
         avalProduto,
         descDetalhadaProduto,
         precoProduto,
         qtdEstoqueProduto,
-        imagens
     };
 
     fetch('http://localhost:8015/produto/', {
@@ -36,33 +44,35 @@ document.querySelector('.form-cadastro').onsubmit = function (event) {
         },
         body: JSON.stringify(produtoData)
     })
-        .then(response => {
-            if (response.ok) {
-                alert('Produto cadastrado com sucesso!');
-                window.location.href = 'ListaProdutos.html';
-            } else {
-                alert('Erro ao cadastrar produto.');
-            }
-        })
-        .catch(error => {
-            console.error('Erro:', error);
-            alert('Erro ao cadastrar produto.');
-        });
+    .then(response => response.json())
+    .then(produto => {
+        addBanco(produto.idProduto); 
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+        alert('Erro ao cadastrar produto.');
+    });
 };
 
-function previewImages(event) {
-    const imagePreviews = document.getElementById('image-previews');
-    imagePreviews.innerHTML = '';
+function addBanco(id) {
+    const formData = new FormData();
 
-    Array.from(event.target.files).forEach(file => {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            const img = document.createElement('img');
-            img.src = e.target.result;
-            img.style.width = '100px';
-            img.style.margin = '5px';
-            imagePreviews.appendChild(img);
-        };
-        reader.readAsDataURL(file);
+    imgsDto.forEach(img => {
+        formData.append('imgBlob', img.blobImg); 
+        formData.append('imgPrincipal', img.imgPrincipal); 
+        formData.append('id', id); 
+    });
+
+    fetch('http://localhost:8015/imgProduto/', {
+        method: 'POST',
+        body: formData 
+    })
+    .then(response => response.json())
+    .then(() => {
+        window.location.href='ListaProdutos.html'
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+        alert('Erro ao cadastrar imagens.');
     });
 }
