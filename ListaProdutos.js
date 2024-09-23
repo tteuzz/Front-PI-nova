@@ -51,6 +51,15 @@ function displayProducts() {
     document.getElementById('page-info').textContent = `Página ${paginaAtual} de ${Math.ceil(products.length / itemsPorPagina)}`;
 }
 
+function viewProduct(id){
+    fetch(`http://localhost:8015/imgProduto/${id}`)
+    .then(response => response.json())
+    .catch(error => {
+        console.error('Erro ao Imgs usuário:', error);
+        alert('Erro ao buscar as imgs.');
+    });
+}
+
 function nextPage() {
     if (paginaAtual * itemsPorPagina < products.length) {
         paginaAtual++;
