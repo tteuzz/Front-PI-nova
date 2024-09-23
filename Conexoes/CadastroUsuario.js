@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     const form = document.getElementById('cadastroForm');
-    
+    const formAdicionarUserAdm = document.getElementById('cadastroUserAdm');
+
     if (form) {
   
         const userToEdit = localStorage.getItem('userEdit');
@@ -17,7 +18,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 event.preventDefault();
 
                 const nome = document.getElementById('nome').value;
-                const email = document.getElementById('email').value;
                 const senha = document.getElementById('senha').value;
                 const cpf = document.getElementById('cpf').value;
                 const tipoUsuario = document.getElementById('tipoUsuario').value;
@@ -48,43 +48,43 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     alert('Ocorreu um erro ao atualizar o usuário.');
                 });
             });
-        } else {
-            form.addEventListener('submit', function(event) {
-                event.preventDefault();
+        } 
+    } 
 
-                const nome = document.getElementById('nome').value;
-                const email = document.getElementById('email').value;
-                const senha = document.getElementById('senha').value;
-                const cpf = document.getElementById('cpf').value;
-                const tipoUsuario = document.getElementById('tipoUsuario').value;
+    if (formAdicionarUserAdm) {
+        formAdicionarUserAdm.addEventListener('submit', function(event) {
+            event.preventDefault();
 
-                const dados = {
-                    usuaNmUsuario: nome,
-                    usuaDsEmail: email,
-                    usuaDsCPF: cpf,
-                    usuaDsPassword: senha,
-                    usuaCdGrupo: tipoUsuario
-                };
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+            const cpf = document.getElementById('cpf').value;
+            const tipoUsuario = document.getElementById('tipoUsuario').value;
 
-                fetch('http://localhost:8015/user', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(dados)
-                })
-                .then(response => {
-                    return response.json();
-                })
-                .then(data => {
-                    window.location.href = 'ListaUsuario.html';
-                })
-                .catch(error => {
-                    console.error('Erro:', error);
-                });
+            const dados = {
+                usuaNmUsuario: nome,
+                usuaDsEmail: email,
+                usuaDsCPF: cpf,
+                usuaDsPassword: senha,
+                usuaCdGrupo: tipoUsuario
+            };
+
+            fetch('http://localhost:8015/user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dados)
+            })
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                window.location.href = 'ListaUsuario.html';
+            })
+            .catch(error => {
+                console.error('Erro:', error);
             });
-        }
-    } else {
-        console.error('Formulário não encontrado!');
+        });
     }
 });
