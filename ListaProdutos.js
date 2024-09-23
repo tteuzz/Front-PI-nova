@@ -53,21 +53,7 @@ function displayProducts() {
     document.getElementById('page-info').textContent = `Página ${paginaAtual} de ${Math.ceil(products.length / itemsPorPagina)}`;
 }
 
-<<<<<<< HEAD
-function viewProduct(id) {
-    fetch(`http://localhost:8015/imgProduto/${id}`)
-        .then(response => response.json())
-        .then(data => {
-           
-        })
-        .catch(error => {
-            console.error('Erro ao buscar a imagem:', error);
-            alert('Erro ao buscar a img.');
-        });
-}
 
-
-=======
 function viewProduct(idProduto) {
     const product = products.find(p => p.idProduto === idProduto); 
 
@@ -134,7 +120,7 @@ function prevImage() {
         imgs[currentImageIndex].style.display = 'block'; 
     }
 }
->>>>>>> b7a59c7 (terminando a sprint 2)
+
 
 function closeModal() {
     document.getElementById('product-modal').style.display = 'none';
