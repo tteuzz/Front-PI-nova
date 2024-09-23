@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Produtos</title>
-    <link rel="shortcut icon" href="../logodaloja.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/LOGO NOVA.jpg type="image/x-icon">
     <link rel="stylesheet" href="../Estilos/ListaProdutos.css">
 </head>
 <body>
     <header>
         <div class="container-header">
-            <img src="img/LOGO NOVA.jpg" alt="Logo">
+            <img src="../img/LOGO NOVA.jpg" alt="Logo">
             <h2 class="nome-loja">N O V A</h2>
-            <img class="icone" src="img/perfil.png" alt="icone de uma pessoa">
+            <img class="icone" src="../img/perfil.png" alt="icone de uma pessoa">
         </div>
     </header>
 
@@ -63,7 +63,25 @@
                 <button onclick="saveQuantity()">Salvar</button>
             </div>
         </div>
-        
+
+        <div id="product-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeModal()">×</span>
+                <h2 id="modal-nome"></h2>
+                <div class="carousel-container">
+                    <button class="carousel-button prev" onclick="prevImage()">&#10094;</button>
+                    <div class="carousel-images" id="carousel-images"></div>
+                    <button class="carousel-button next" onclick="nextImage()">&#10095;</button>
+                </div>
+    
+                <p><strong>Nome:</strong> <span id="modal-name"></span></p>
+                <p><strong>Avaliação:</strong> <span id="modal-avaliacao"></span></p>
+                <p><strong>Descrição:</strong> <span id="modal-descricao"></span></p>
+                <p><strong>Preço:</strong> <span id="modal-preco"></span></p>
+                <p><strong>Quantidade em Estoque:</strong> <span id="modal-qtd"></span></p>
+                <button class="botao-addCarrinho">Adicionar ao carrinho</button>
+            </div>
+
         
     <div class="pagination-container">
         <button id="prev-page" onclick="prevPage()">Anterior</button>
