@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         
             const user = JSON.parse(userToEdit);
             document.getElementById('nome').value = user.usuaNmUsuario;
-            document.getElementById('email').value = user.usuaDsEmail;
             document.getElementById('cpf').value = user.usuaDsCPF;
             document.getElementById('senha').value = user.usuaDsPassword;
  

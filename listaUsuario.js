@@ -39,7 +39,7 @@ function editarUsuario(id) {
         .then(response => response.json())
         .then(user => {
             localStorage.setItem('userEdit', JSON.stringify(user));
-            window.location.href = 'TelaCadastrousuario.html';
+            window.location.href = 'TelaEditarUsuario.html';
         })
         .catch(error => {
             console.error('Erro ao buscar usuário:', error);
