@@ -36,9 +36,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     console.log('Dados recebidos:', data); // Log dos dados recebidos
                     sessionStorage.setItem('usuario', usuario)
                     if (usuario == "Administrador") {
+                        localStorage.setItem("grupoUsuario","administrador")
                         window.location.href = 'TelaBackoffice.html'
                     } else if (usuario == "Estoquista") {
                         window.location.href = 'TelaBackofficeEstoquista.html';
+                        localStorage.setItem("grupoUsuario","estoquista")
                     } else {
                         window.location.href = 'TelaPrincipal.html';
                     }

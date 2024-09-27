@@ -4,6 +4,8 @@ let paginaAtual = 1;
 let currentImageIndex = 0; 
 let images = []; 
 
+const grupoUsuario = localStorage.getItem("grupoUsuario");
+
 document.addEventListener('DOMContentLoaded', () => {
     fetchProducts();
 });
@@ -35,18 +37,19 @@ function displayProducts() {
         
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${product.idProduto || 'N/A'}</td>
-            <td>${product.nomeProduto || 'N/A'}</td>
-            <td>${product.avalProduto !== null ? product.avalProduto : 'N/A'}</td>
-            <td>${product.descDetalhadaProduto || 'N/A'}</td>
-            <td>R$ ${product.precoProduto ? product.precoProduto.toFixed(2) : 'N/A'}</td>
-            <td>${product.qtdEstoqueProduto || 0}</td>
-            <td>${status}</td>
-            <td>
-                <button onclick="viewProduct(${product.idProduto})">Visualizar</button>
-                <button onclick="openModal(${product.idProduto}, ${product.qtdEstoqueProduto})">Editar</button>
-            </td>
-        `;
+        <td>${product.idProduto || 'N/A'}</td>
+        <td>${product.nomeProduto || 'N/A'}</td>
+        <td>${product.avalProduto !== null ? product.avalProduto : 'N/A'}</td>
+        <td>${product.descDetalhadaProduto || 'N/A'}</td>
+        <td>R$ ${product.precoProduto ? product.precoProduto.toFixed(2) : 'N/A'}</td>
+        <td>${product.qtdEstoqueProduto || 0}</td>
+        <td>${status}</td>
+        <td>
+            <button onclick="viewProduct(${product.idProduto})">Visualizar</button>
+             ${grupoUsuario === 'administrador' ? `<button onclick="alterarStatus(${product.idProduto})">Alterar Status</button>` : ''}
+             ${grupoUsuario === 'estoquista' ? `<button onclick="openModal(${product.idProduto}, ${product.qtdEstoqueProduto})">Alterar a quantidade</button>` : ''}
+        </td>
+    `;
         tableBody.appendChild(row);
     });
 
@@ -86,7 +89,6 @@ function viewProduct(idProduto) {
                 carouselImages.appendChild(principalImgElement);
                 images.push(principalImgElement.src);
             }
-
             data.forEach(img => {
                 if (!img.imgPrincipal) {
                     const imgElement = document.createElement('img');
@@ -136,7 +138,7 @@ function prevImage() {
 }
 
 function close(){
-     document.getElementById("product-modal").style.display = 'none';
+     document.getElementById('product-modal').style.display = 'none';
 }
 
 
@@ -225,6 +227,10 @@ function alterarStatus(idProduto) {
         if (!response.ok) {
             alert('Erro ao alterar status.');
             throw new Error('Erro ao alterar status');
+        }else{
+            displayUsers();
+            window.location.reload()
         }
     });
+
 }

@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     const form = document.getElementById('cadastroForm');
     const formAdicionarUserAdm = document.getElementById('cadastroUserAdm');
+    const formCadastrarUser = document.getElementById('cadastro');
 
     if (form) {
   
@@ -84,6 +85,42 @@ document.addEventListener('DOMContentLoaded', (event) => {
             })
             .catch(error => {
                 console.error('Erro:', error);
+            });
+        });
+    }
+
+    if(formCadastrarUser) {
+        formCadastrarUser.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+            const cpf = document.getElementById('cpf').value;
+
+            const dados = {
+                usuaNmUsuario: nome,
+                usuaDsEmail: email,
+                usuaDsCPF: cpf,
+                usuaDsPassword: senha,
+                usuaCdGrupo: 'Usuário'
+            };
+
+            fetch('http://localhost:8015/user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dados)
+            })
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                window.location.href = 'ListaUsuario.html';
+            })
+            .catch(error => {
+                alert('Erro:', error);
             });
         });
     }
