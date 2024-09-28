@@ -3,6 +3,7 @@ const itemsPorPagina = 10;
 let paginaAtual = 1;
 let currentImageIndex = 0; 
 let images = []; 
+let imagesToEdit = []
 
 const grupoUsuario = localStorage.getItem("grupoUsuario");
 
@@ -46,7 +47,8 @@ function displayProducts() {
         <td>${status}</td>
         <td>
             <button onclick="viewProduct(${product.idProduto})">Visualizar</button>
-             ${grupoUsuario === 'administrador' ? `<button onclick="alterarStatus(${product.idProduto})">Alterar Status</button>` : ''}
+               ${grupoUsuario === 'administrador' ? `<button onclick="alterarStatus(${product.idProduto})">Alterar Status</button>` : ''}
+               ${grupoUsuario === 'administrador' ? `<button onclick="editarProduto(${product.idProduto})">editar Produto</button>` : ''}
              ${grupoUsuario === 'estoquista' ? `<button onclick="openModal(${product.idProduto}, ${product.qtdEstoqueProduto})">Alterar a quantidade</button>` : ''}
         </td>
     `;
@@ -56,6 +58,38 @@ function displayProducts() {
     document.getElementById('page-info').textContent = `Página ${paginaAtual} de ${Math.ceil(products.length / itemsPorPagina)}`;
 }
 
+
+function editarProduto(id) {
+    fetch(`http://localhost:8015/produto/${id}/acharProduto`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao buscar produto');
+            }
+            return response.json();
+        })
+        .then(produto => {
+            localStorage.setItem('produtoEdit', JSON.stringify(produto));
+
+            return fetch(`http://localhost:8015/imgProduto/${produto.idProduto}`);
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao buscar imagens do produto');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const imagesToEdit = data.map(img => `data:image/jpeg;base64,${img.imgBlob}`);
+            localStorage.setItem('imagesEdit', JSON.stringify(imagesToEdit));
+
+          
+            window.location.href = 'TelaEditarProduto.html';
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro ao buscar os dados do produto.');
+        });
+}
 
 function viewProduct(idProduto) {
     const product = products.find(p => p.idProduto === idProduto); 
@@ -217,20 +251,27 @@ function atualizarQuantidade(idProduto, novaQuantidade) {
 }
 
 function alterarStatus(idProduto) {
-    return fetch(`http://localhost:8015/produto/${idProduto}/alterarStatus`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => {
-        if (!response.ok) {
-            alert('Erro ao alterar status.');
-            throw new Error('Erro ao alterar status');
-        }else{
-            displayUsers();
-            window.location.reload()
-        }
-    });
-
+    if (confirm('Deseja alterar o status?')) {
+        return fetch(`http://localhost:8015/produto/${idProduto}/alterarStatus`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                alert('Erro ao alterar status.');
+                throw new Error('Erro ao alterar status');
+            } else {
+                displayUsers();
+                window.location.reload();
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+        });
+    } else {
+        console.log('Alteração de status cancelada.');
+    }
 }
+
