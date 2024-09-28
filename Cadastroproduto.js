@@ -14,7 +14,7 @@ function previewImages(event) {
 
         const blobObject = { 
             blobImg: file,
-            imgPrincipal: index === 0 // Define imgPrincipal como true apenas para o primeiro arquivo
+            imgPrincipal: index === 0
         };
         imgsDto.push(blobObject);
     });
