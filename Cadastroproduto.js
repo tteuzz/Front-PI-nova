@@ -46,7 +46,7 @@ document.querySelector('.form-cadastro').onsubmit = function (event) {
     })
     .then(response => response.json())
     .then(produto => {
-        addBanco(produto.idProduto); 
+        addImg(produto.idProduto); 
     })
     .catch(error => {
         console.error('Erro:', error);
@@ -54,7 +54,7 @@ document.querySelector('.form-cadastro').onsubmit = function (event) {
     });
 };
 
-function addBanco(id) {
+function addImg(id) {
     const formData = new FormData();
 
     imgsDto.forEach(img => {
