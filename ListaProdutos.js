@@ -79,7 +79,12 @@ function editarProduto(id) {
             return response.json();
         })
         .then(data => {
-            const imagesToEdit = data.map(img => `data:image/jpeg;base64,${img.imgBlob}`);
+            const imagesToEdit = data.map(img => ({
+                id: img.idImgProd,
+                imgBlob: `data:image/jpeg;base64,${img.imgBlob}`
+            }));
+            
+
             localStorage.setItem('imagesEdit', JSON.stringify(imagesToEdit));
 
           

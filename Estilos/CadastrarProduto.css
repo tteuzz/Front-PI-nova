@@ -327,3 +327,28 @@ img {
         font-size: 16px;
     }
 }
+
+.remove-button {
+    display: flex;
+    align-items: center;
+    background-color: #e74c3c; 
+    height: 2vw;
+    color: white;
+    border: none; 
+    border-radius: 5px; 
+    padding: 8px 12px; 
+    cursor: pointer; 
+    font-size: 14px; 
+    transition: background-color 0.3s ease; 
+}
+
+.remove-button:hover {
+    background-color: #c0392b; 
+}
+.remove-button:focus {
+    outline: none; 
+}
+.principal {
+    border: 2px solid green; 
+    transform: scale(1.1); 
+}
