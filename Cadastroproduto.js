@@ -6,17 +6,45 @@ function previewImages(event) {
     previewsContainer.innerHTML = ''; 
     imgsDto = [];
 
-    Array.from(files).forEach((file, index) => {
+    Array.from(files).forEach((file) => {
         const img = document.createElement('img');
         img.src = URL.createObjectURL(file); 
         img.className = 'image-preview';
-        previewsContainer.appendChild(img);
 
         const blobObject = { 
             blobImg: file,
-            imgPrincipal: index === 0
+            imgPrincipal: false,
+            imgElement: img 
         };
         imgsDto.push(blobObject);
+
+    
+        img.onclick = function () {
+            imgsDto.forEach(imgObj => {
+                imgObj.imgPrincipal = false; 
+                imgObj.imgElement.classList.remove('principal'); 
+            });
+            blobObject.imgPrincipal = true; 
+            img.classList.add('principal'); 
+        };
+
+        previewsContainer.appendChild(img);
+
+        const removeButton = document.createElement('button');
+        removeButton.innerText = 'x';
+        removeButton.className = 'remove-button';
+        removeButton.onclick = function () {
+            previewsContainer.removeChild(img);
+            previewsContainer.removeChild(removeButton);
+            imgsDto = imgsDto.filter(i => i !== blobObject); 
+            if (blobObject.imgPrincipal) {
+                if (imgsDto.length > 0) {
+                    imgsDto[0].imgPrincipal = true;
+                    imgsDto[0].imgElement.classList.add('principal');
+                }
+            }
+        };
+        previewsContainer.appendChild(removeButton);
     });
 }
 
@@ -46,7 +74,7 @@ document.querySelector('.form-cadastro').onsubmit = function (event) {
     })
     .then(response => response.json())
     .then(produto => {
-        addImg(produto.idProduto); 
+        addBanco(produto.idProduto); 
     })
     .catch(error => {
         console.error('Erro:', error);
@@ -54,7 +82,7 @@ document.querySelector('.form-cadastro').onsubmit = function (event) {
     });
 };
 
-function addImg(id) {
+function addBanco(id) {
     const formData = new FormData();
 
     imgsDto.forEach(img => {
