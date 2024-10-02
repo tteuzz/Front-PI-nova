@@ -279,4 +279,3 @@ function alterarStatus(idProduto) {
         console.log('Alteração de status cancelada.');
     }
 }
-
