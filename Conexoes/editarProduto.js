@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         imagesEdit.forEach(src => {
             const img = document.createElement('img');
-            img.src = src;
+            img.src = src.imgBlob;
             img.className = 'image-preview';
             previewsContainer.appendChild(img);
         });
