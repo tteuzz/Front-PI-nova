@@ -1,5 +1,3 @@
-
-
 document.addEventListener('DOMContentLoaded', () => {
     fetchProducts();
 });
@@ -21,9 +19,8 @@ function displayProducts(products) {
   const cardContainer = document.querySelector('.l-cards'); 
   cardContainer.innerHTML = ''; 
 
-  products.forEach(product => {
-      
-      fetch(`http://localhost:8015/imgProduto/${product.idProduto}`)
+  const promises = products.map(product => {
+      return fetch(`http://localhost:8015/imgProduto/${product.idProduto}`)
       .then(response => {
           if (!response.ok) {
               throw new Error('Erro na resposta da rede');
@@ -31,13 +28,25 @@ function displayProducts(products) {
           return response.json();
       })
       .then(imagesData => {
-        
           const principalImage = imagesData.find(img => img.imgPrincipal);
           
-         
           if (principalImage) {
               const imgSrc = `data:image/jpeg;base64,${principalImage.imgBlob}`;
+              
+              return { product, imgSrc }; // Retorna o produto e a imagem
+          }
+      })
+      .catch(error => {
+          console.error('Erro ao buscar a imagem:', error);
+      });
+  });
 
+  // Espera todas as promessas serem resolvidas
+  Promise.all(promises).then(results => {
+      results.forEach(result => {
+          if (result) { // Certifique-se de que o resultado não seja undefined
+              const { product, imgSrc } = result;
+              
               const card = document.createElement('article');
               card.classList.add('c-card');
 
@@ -51,18 +60,13 @@ function displayProducts(products) {
                       <button class="button" onclick="viewProduct(${product.idProduto})">Detalhe</button>
                   </div>
               `;
-              
+
               cardContainer.appendChild(card);
           }
-      })
-      .catch(error => {
-          console.error('Erro ao buscar a imagem:', error);
       });
   });
 }
 
-
 function viewProduct(idProduto) {
-   
     window.location.href = `TelaProdutoDetalhe.html?id=${idProduto}`;
 }
