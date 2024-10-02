@@ -13,7 +13,7 @@
 <body>
     <header class="container-header">
         <div class="logo">
-            <img src="../img/LOGO NOVA.jpg" alt="Logo NOVA">
+            <a href="TelaHome.html"><img src="../img/LOGO NOVA.jpg" alt="Logo NOVA"></a>
             <h2>N O V A</h2>
         </div>
         <nav class="navegacao">
@@ -24,13 +24,12 @@
                 <li><a href="TelaContato.html">Contato</a></li>
             </ul>
         </nav>
+
         <div class="nav-icon-container">
-            <div class="perfil">
-                <img class="icone" src="../img/perfil.png" alt="icone de uma pessoa">
-            </div>
-            <img class="carrinho-button" src="../img/carrinho-de-compras.png"
-                alt="icone de carrinho de compras">
+            <img src="../img/icone.png" class="icone" alt="Ícone">
+            <a href="TelaCarrinho.html"><img class="carrinho-button" src="../img/carrinho.png" alt="icone de carrinho de compras"></a>
         </div>
+
     </header>
 
     <main>
@@ -69,16 +68,21 @@
         <!-- fim do carrossel -->
 
         <div class="l-cards">
-          
+      
         </div>
 
     </main>
 
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    <div class="card-login-cadastro" id="card-login-cadastro">
+        <button onclick="login()">Login</button>
+        <button onclick="cadastro()">Cadastro</button>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <script src="../Conexoes/TelaHome.js"></script>
-  
+        <script src="../Conexoes/TelaHome.js"></script>
 </body>
 
 </html>
