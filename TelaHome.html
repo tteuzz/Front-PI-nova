@@ -13,7 +13,7 @@
 <body>
     <header class="container-header">
         <div class="logo">
-            <img src="Front-PI-Nova-MatheusBranch/img/LOGO NOVA.jpg" alt="Logo NOVA">
+            <a href="TelaHome.html"><img src="img/LOGO NOVA.jpg" alt="Logo NOVA"></a>
             <h2>N O V A</h2>
         </div>
         <nav class="navegacao">
@@ -24,13 +24,12 @@
                 <li><a href="TelaContato.html">Contato</a></li>
             </ul>
         </nav>
+
         <div class="nav-icon-container">
-            <div class="perfil">
-                <img class="icone" src="Front-PI-Nova-MatheusBranch/img/perfil.png" alt="icone de uma pessoa">
-            </div>
-            <img class="carrinho-button" src="Front-PI-Nova-MatheusBranch/img/carrinho-de-compras.png"
-                alt="icone de carrinho de compras">
+            <img src="img/icone.png" class="icone" alt="Ícone">
+            <a href="TelaCarrinho.html"><img class="carrinho-button" src="img/carrinho.png" alt="icone de carrinho de compras"></a>
         </div>
+
     </header>
 
     <main>
@@ -46,13 +45,13 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="Front-PI-Nova-MatheusBranch/img/background-roxo.jpg" class="d-block w-100" alt="...">
+                    <img src="img/background-roxo.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="Front-PI-Nova-MatheusBranch/img/background-roxo.jpg" class="d-block w-100" alt="...">
+                    <img src="img/background-roxo.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="Front-PI-Nova-MatheusBranch/img/background-roxo.jpg" class="d-block w-100" alt="...">
+                    <img src="img/background-roxo.jpg" class="d-block w-100" alt="...">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
@@ -71,7 +70,7 @@
         <div class="l-cards">
             <article class="c-card">
                 <div class="c-card__image">
-                    <img src="Front-PI-Nova-MatheusBranch/img/gpro.png" width="100%" alt="image placeholder">
+                    <img src="img/gpro.png" width="100%" alt="image placeholder">
                 </div>
 
                 <div class="c-card__content">
@@ -83,7 +82,7 @@
 
             <article class="c-card">
                 <div class="c-card__image">
-                    <img src="Front-PI-Nova-MatheusBranch/img/tecladogpro.png" width="100%" alt="image placeholder">
+                    <img src="img/tecladogpro.png" width="100%" alt="image placeholder">
                 </div>
 
                 <div class="c-card__content">
@@ -95,7 +94,7 @@
 
             <article class="c-card">
                 <div class="c-card__image">
-                    <img src="Front-PI-Nova-MatheusBranch/img/rtx3060.png" width="100%" alt="image placeholder">
+                    <img src="img/rtx3060.png" width="100%" alt="image placeholder">
                 </div>
 
                 <div class="c-card__content">
@@ -107,7 +106,7 @@
 
             <article class="c-card">
                 <div class="c-card__image">
-                    <img src="Front-PI-Nova-MatheusBranch/img/ryzen.png" width="100%" alt="image placeholder">
+                    <img src="img/ryzen.png" width="100%" alt="image placeholder">
                 </div>
 
                 <div class="c-card__content">
@@ -119,7 +118,7 @@
 
             <article class="c-card">
                 <div class="c-card__image">
-                    <img src="Front-PI-Nova-MatheusBranch/img/monitor.png" width="100%" alt="image placeholder">
+                    <img src="img/monitor.png" width="100%" alt="image placeholder">
                 </div>
 
                 <div class="c-card__content">
@@ -131,7 +130,7 @@
 
             <article class="c-card">
                 <div class="c-card__image">
-                    <img src="Front-PI-Nova-MatheusBranch/img/gpro.png" width="100%" alt="image placeholder">
+                    <img src="img/gpro.png" width="100%" alt="image placeholder">
                 </div>
 
                 <div class="c-card__content">
@@ -143,7 +142,7 @@
 
             <article class="c-card">
                 <div class="c-card__image">
-                    <img src="Front-PI-Nova-MatheusBranch/img/gpro.png" width="100%" alt="image placeholder">
+                    <img src="img/gpro.png" width="100%" alt="image placeholder">
                 </div>
 
                 <div class="c-card__content">
@@ -155,6 +154,11 @@
         </div>
 
     </main>
+
+    <div class="card-login-cadastro" id="card-login-cadastro">
+        <button onclick="login()">Login</button>
+        <button onclick="cadastro()">Cadastro</button>
+    </div>
 
     <script src="TelaHome.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

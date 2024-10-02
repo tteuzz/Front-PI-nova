@@ -192,13 +192,6 @@ img {
     font-family: 'Inter', sans-serif;
 }
 
-.tabela th, tabela td {
-    padding: 10px;
-    border: 1px solid #ccc;
-    text-align: left;
-    font-family: 'Inter', sans-serif;
-}
-
 .botao {
     padding: 5px 10px;
     font-size: 14px;
