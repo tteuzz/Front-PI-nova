@@ -1,5 +1,5 @@
 let currentImageIndex = 0;
-const images = []; // Array para armazenar as imagens do produto
+const images = []; 
 
 document.addEventListener('DOMContentLoaded', () => {
     const productId = getProductIdFromUrl();
@@ -65,8 +65,6 @@ function fetchProductImages(productId) {
         });
 }
 
-
-
 function displayProductImages(imagesData) {
     const carouselImages = document.getElementById('carousel-images');
     carouselImages.innerHTML = '';
@@ -81,7 +79,7 @@ function displayProductImages(imagesData) {
     });
 
     if (images.length > 0) {
-        showImage(currentImageIndex); // Mostra a primeira imagem
+        showImage(currentImageIndex); 
     }
 }
 
@@ -102,15 +100,25 @@ function prevImage() {
     showImage(currentImageIndex);
 }
 
-let cart = [];
+let cart = JSON.parse(localStorage.getItem('produtos')) || [];
 
 function addToCart(product) {
-    const existingProduct = cart.find(item => item.name === product.nomeProduto);
+    const existingProduct = cart.find(item => item.nome === product.nomeProduto);
+    const imageUrl = images[0];  
+
     if (existingProduct) {
-        existingProduct.quantity += 1;
+        existingProduct.quantidade += 1; // Aumenta a quantidade se já existir
     } else {
-        cart.push({ name: product.nomeProduto, price: product.precoProduto, quantity: 1 });
+        cart.push({ 
+            nome: product.nomeProduto, 
+            preco: product.precoProduto, 
+            quantidade: 1,  
+            imagem: imageUrl 
+        });
     }
+
+    localStorage.setItem('produtos', JSON.stringify(cart));
+    
     updateCartDisplay();
 }
 
@@ -122,10 +130,13 @@ function updateCartDisplay() {
 
     cart.forEach(item => {
         const listItem = document.createElement("li");
-        listItem.textContent = `${item.name} - R$ ${item.price.toFixed(2)} (x${item.quantity})`;
+        listItem.innerHTML = `
+            <img src="${item.imagem}" alt="${item.nome}" style="width:50px; height:50px;"/> 
+            ${item.nome} - R$ ${item.preco.toFixed(2)} (x${item.quantidade})
+        `;
         cartItemsElement.appendChild(listItem);
-        total += item.price * item.quantity;
+        total += item.preco * item.quantidade;
     });
 
-    cartTotalElement.textContent = total.toFixed(2);
+    cartTotalElement.textContent = `Total: R$ ${total.toFixed(2)}`;
 }
