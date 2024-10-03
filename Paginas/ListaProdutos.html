@@ -29,8 +29,13 @@
 
         <div class="caixa-pesquisa">
             <input type="text" class="pesquisa" id="searchInput" placeholder="Pesquisar produto" onkeyup="searchProduct()">
+
             <button class="botao-pesquisa" onclick="searchProduct()">Pesquisar</button>
         </div>        
+
+            <a href="TelaBackoffice.html"><button class="botao-voltar">Voltar</button></a>
+        </div>      
+
     </div>
 
     <div class="tabela-container">
@@ -56,11 +61,6 @@
                 <input type="hidden" id="idProduto" />
                 <label for="qtdEstoqueProduto">Quantidade em Estoque:</label>
                 <input type="number" id="qtdEstoqueProduto" />
-                <label for="statusProduto">Status:</label>
-                <select id="statusProduto">
-                    <option value="ATIVO">Ativo</option>
-                    <option value="INATIVO">Inativo</option>
-                </select>
                 <button onclick="saveQuantity()">Salvar</button>
             </div>
         </div>
@@ -91,8 +91,8 @@
         </div>
     </div>
 
-
-    <script src="../PesquisaInteligente.js"></script>
+    <script src="../Conexoes/ListaProdutos.js"></script>
+    <script src="../Conexoes/PesquisaInteligente.js"></script>
 </body>
 </html>
 
