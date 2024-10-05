@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function removeProduct(index) {
-        products.splice(index, 1); // Remove o produto do array
+        products.splice(index, 1); 
         updateLocalStorageAndDisplay();
     }
 
@@ -87,7 +87,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('resumo-valor').textContent = `Valor dos Produtos: R$ ${valorTotal.toFixed(2).replace('.', ',')}`;
     }
 
-    // Exibe os produtos assim que a página carrega
     displayProducts();
     atualizarResumo();
 
@@ -112,15 +111,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert("CEP inválido.");
                 return;
             }
+
+            let frete = 0;
             if (primeiroQuantil.includes(dados.uf)) {
-                document.getElementById("frete-resultado").innerHTML = "Preço: R$35,00";
+                frete = 35;
             } else if (segundoQuantil.includes(dados.uf)) {
-                document.getElementById("frete-resultado").innerHTML = "Preço: R$25,00";
+                frete = 25;
             } else if (terceiroQuantil.includes(dados.uf)) {
-                document.getElementById("frete-resultado").innerHTML = "Preço: R$15,00";
+                frete = 15;
             } else {
                 document.getElementById("frete-resultado").innerHTML = "UF não está na tabela de preços.";
+                return;
             }
+
+            const valorTotalProdutos = products.reduce((acc, product) => acc + (parseFloat(product.preco) * product.quantidade), 0);
+            const valorTotalCompra = valorTotalProdutos + frete;
+
+            document.getElementById("frete-resultado").innerHTML = `
+                <p>Frete: R$ ${frete.toFixed(2).replace('.', ',')}</p>
+                <p><strong>Valor Total da Compra: R$ ${valorTotalCompra.toFixed(2).replace('.', ',')}</strong></p>
+            `;
         })
         .catch(error => {
             alert("Erro ao buscar o CEP: " + cep);
