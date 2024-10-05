@@ -107,7 +107,7 @@ function addToCart(product) {
     const imageUrl = images[0];  
 
     if (existingProduct) {
-        existingProduct.quantidade += 1; // Aumenta a quantidade se já existir
+        existingProduct.quantidade += 1;
     } else {
         cart.push({ 
             nome: product.nomeProduto, 
@@ -120,6 +120,10 @@ function addToCart(product) {
     localStorage.setItem('produtos', JSON.stringify(cart));
     
     updateCartDisplay();
+    
+    alert("1 produto foi adicionado ao carrinho! Você será redirecionado à página principal para continuar comprando.");
+    
+    window.location.href = 'TelaHome.html';
 }
 
 function updateCartDisplay() {

@@ -42,7 +42,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
                         window.location.href = 'TelaBackofficeEstoquista.html';
                         localStorage.setItem("grupoUsuario","estoquista")
                     } else {
-                        window.location.href = 'TelaPrincipal.html';
+                        window.location.href = 'TelaCarrinho.html';
+                        
                     }
 
                 })

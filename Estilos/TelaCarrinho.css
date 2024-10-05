@@ -260,3 +260,44 @@ body {
         font-size: 0.9em;
     }
 }
+.modal {
+    display: none; /* Oculta a modal por padrão */
+    position: fixed; /* Fica fixa na tela */
+    z-index: 1; /* Fica acima de outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Largura total da tela */
+    height: 100%; /* Altura total da tela */
+    overflow: auto; /* Adiciona scroll se necessário */
+    background-color: rgb(0,0,0); /* Cor de fundo */
+    background-color: rgba(0,0,0,0.4); /* Cor de fundo com opacidade */
+}
+
+.modal-conteudo {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% do topo e centralizado */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Largura da modal */
+    max-width: 400px; /* Largura máxima */
+    text-align: center;
+    border-radius: 8px; /* Bordas arredondadas */
+}
+
+.fechar {
+    color: #aaa;
+    float: right; /* Alinha o botão de fechar à direita */
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.fechar:hover,
+.fechar:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-botoes {
+    margin-top: 20px; /* Espaçamento acima dos botões */
+}
