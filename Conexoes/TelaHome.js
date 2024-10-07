@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 function login() {
-    window.location.href = 'TelaInicial.html';
+    window.location.href = 'Telainicial.html';
 }
 
 function cadastro() {

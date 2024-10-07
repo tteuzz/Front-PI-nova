@@ -42,13 +42,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
                         window.location.href = 'TelaBackofficeEstoquista.html';
                         localStorage.setItem("grupoUsuario","estoquista")
                     } else {
-                        window.location.href = 'TelaCarrinho.html';
-                        
+                        localStorage.setItem("grupoUsuario","usuario")
+                        window.location.href = 'TelaHome.html';   
                     }
-
                 })
                 .catch(error => {
-                    console.error('Erro:', error); // Log do erro
+                    console.error('Erro:', error); 
                     alert('Ocorreu um erro ao fazer login.');
                 });
         });
